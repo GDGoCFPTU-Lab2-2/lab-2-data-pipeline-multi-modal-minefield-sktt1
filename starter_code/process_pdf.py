@@ -12,7 +12,16 @@ load_dotenv()
 # ==========================================
 # Task: Use Gemini API to extract structured data from lecture_notes.pdf
 
-def extract_pdf_data(file_path):
+def extract_pdf_data(file_path: str) -> dict | None:
+    """
+    Extract structured data from a PDF file using the Gemini API.
+
+    Args:
+        file_path (str): The absolute or relative path to the PDF file.
+
+    Returns:
+        dict | None: A dictionary formatted as a UnifiedDocument, or None on failure.
+    """
     # --- FILE CHECK (Handled for students) ---
     if not os.path.exists(file_path):
         print(f"Error: File not found at {file_path}")

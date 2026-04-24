@@ -2,6 +2,11 @@
 
 # Data Pipeline Multi-Modal Minefield
 
+## Team Members
+- Nguyễn Năng Anh - nguyennanganh199203@gmail.com - NGUYENNANGANH
+- Hoàng ngọc anh - hoanganh24704@gmail.com - hoangngocanh2407
+- Nguyễn ngọc hiếu - nguyenhieu0802@proton.me - stardust-zip
+
 ## Overview
 
 A robust data ingestion pipeline that processes multiple data sources (PDF, CSV, HTML, Video Transcript, Legacy Code) into a unified Knowledge Base.

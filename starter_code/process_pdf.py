@@ -32,8 +32,8 @@ def extract_pdf_data(file_path):
         # Upload file
         pdf_file = genai.upload_file(path=file_path)
         
-        # Sử dụng model gemini-1.5-flash
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        # Sử dụng model gemini-2.0-flash (model mới nhất)
+        model = genai.GenerativeModel('gemini-2.0-flash')
         prompt = """
         Extract the Title, Author, and a 3-sentence summary from this document.
         Return the result strictly as a valid JSON object with keys "Title", "Author", and "Summary".

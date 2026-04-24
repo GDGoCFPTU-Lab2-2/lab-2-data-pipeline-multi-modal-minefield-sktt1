@@ -12,3 +12,6 @@ __pycache__/
 # IDE
 .vscode/
 .idea/
+
+# Generated output
+processed_knowledge_base.json

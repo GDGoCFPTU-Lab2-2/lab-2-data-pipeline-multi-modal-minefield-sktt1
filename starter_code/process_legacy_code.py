@@ -1,4 +1,5 @@
 import ast
+import re
 
 # ==========================================
 # ROLE 2: ETL/ELT BUILDER
@@ -11,9 +12,39 @@ def extract_logic_from_code(file_path):
         source_code = f.read()
     # ------------------------------------------
     
-    # TODO: Use the 'ast' module to find docstrings for functions
-    # TODO: (Optional/Advanced) Use regex to find business rules in comments like "# Business Logic Rule 001"
-    # TODO: Return a dictionary for the UnifiedDocument schema.
+    docs = []
     
-    return {}
-
+    try:
+        tree = ast.parse(source_code)
+    except:
+        return {}
+        
+    docstrings = []
+    
+    # Module docstring
+    module_doc = ast.get_docstring(tree)
+    if module_doc: docstrings.append(f"Module: {module_doc}")
+        
+    # Function docstrings
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef):
+            func_doc = ast.get_docstring(node)
+            if func_doc: docstrings.append(f"Function {node.name}: {func_doc}")
+            
+    content = "\n\n".join(docstrings)
+    
+    # Find business rules in comments
+    business_rules = re.findall(r'#.*Business Logic Rule.*', source_code, re.IGNORECASE)
+    if business_rules:
+        content += "\nRules:\n" + "\n".join(business_rules)
+        
+    return {
+        "document_id": "code-legacy-pipeline",
+        "content": content,
+        "source_type": "Code",
+        "author": "Senior Dev",
+        "timestamp": None,
+        "source_metadata": {
+            "has_docstrings": len(docstrings) > 0
+        }
+    }
